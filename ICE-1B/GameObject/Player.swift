@@ -14,6 +14,7 @@ class Player: GameObject
     init()
     {
         super.init(imageString: "plane", initialScale: 2.0)
+        Start()
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -23,7 +24,7 @@ class Player: GameObject
     
     override func Start()
     {
-        zPosition = 2
+        zPosition = Layer.plane.rawValue
         Reset()
     }
     
@@ -35,21 +36,20 @@ class Player: GameObject
     override func CheckBounds()
     {
         //constriant the player on the left boundary
-        if(position.x <= -255)
+        if(position.x <= -320)
         {
-            position.x = -255
+            position.x = -320
         }
         
-        if(position.x >= 255)
-        {
-            position.x = 255
+        if(position.x >= 320){
+            position.x = 320
         }
     }
     
     
     override func Reset()
     {
-        position.y = -495
+        position.y = -520
     }
     
     func TouchMove(newPros: CGPoint) {

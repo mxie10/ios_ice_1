@@ -18,6 +18,8 @@ class GameScene: SKScene
     var ocean1: Ocean?
     var ocean2: Ocean?
     var player: Player?
+    var island: Island?
+    var clouds: [Cloud] = []
     
     override func sceneDidLoad()
     {
@@ -33,26 +35,34 @@ class GameScene: SKScene
         
         //add the second ocean
         ocean2 = Ocean()
-        ocean2?.position.y = -733
+        ocean2?.position.y = -627
         addChild(ocean2!)
         
         //add the player to the scene
         player = Player()
-        player?.Reset()
         addChild(player!)
+        
+        island = Island()
+        addChild(island!)
+        
+        for _ in 0...2 {
+            let cloud = Cloud()
+            clouds.append(cloud)
+            addChild(cloud)
+        }
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-        player?.TouchMove(newPros: CGPoint(x:pos.x,y:-495))
+        player?.TouchMove(newPros: CGPoint(x:pos.x,y:-520))
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        player?.TouchMove(newPros: CGPoint(x:pos.x,y:-495))
+        player?.TouchMove(newPros: CGPoint(x:pos.x,y:-520))
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        player?.TouchMove(newPros: CGPoint(x:pos.x,y:-495))
+        player?.TouchMove(newPros: CGPoint(x:pos.x,y:-520))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -76,5 +86,10 @@ class GameScene: SKScene
         ocean1?.Update()
         ocean2?.Update()
         player?.Update()
+        island?.Update()
+        for cloud in clouds
+        {
+            cloud.Update()
+        }
     }
 }
